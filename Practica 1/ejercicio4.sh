@@ -1,7 +1,7 @@
-#!bin/bash/
+#!/bin/bash
 
 echo "Introduce una password"
-read -r contra
+read -rs contra
 
 if [ ${#contra} -ge  8 ];
 then
@@ -10,11 +10,23 @@ else
         echo "NO cumple con la longitud"
 fi
 
-contra_temp=${contra}
+contra_temp="${contra}"
 echo "Contra temporal $contra_temp"
+#Quitamos un numero
+contra_temp=${contra_temp//[0-9]/}
+#inicia logica
+if [ ${#contra_temp} != ${#contra} ];
+then
+  contra_temp_signo=${contra_temp//[#@%&"+""-""*""="]/}
+  if [ ${#contra_temp_signo} != ${#contra_temp} ];
 
-num_verificacion= $contra | awk '/[a-z0-9@#$%&*-+=]/'
+  then
+    echo "Password aceptada"
+  else
+    echo "Password no aceptada, falta especial"
+  fi
 
-echo "$num_verificacion"
+else
+  echo "Password no aceptada, falta numero"
 
-
+fi
