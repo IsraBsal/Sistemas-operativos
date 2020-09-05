@@ -17,6 +17,7 @@ contra_temp=${contra_temp//[0-9]/}
 #inicia logica
 if [ ${#contra_temp} != ${#contra} ];
 then
+  #Quitamos un caracter especial
   contra_temp_signo=${contra_temp//[#@%&"+""-""*""="]/}
   if [ ${#contra_temp_signo} != ${#contra_temp} ];
 
