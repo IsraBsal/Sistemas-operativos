@@ -7,6 +7,9 @@ num_total_procesos=$(ps -ef --no-headers | wc -l)
 #echo "$num_total_procesos"
 anterior=0
 
+#CReacion y encabezado del archivo
+echo "proceson con mas de 5 hijos: " > bitacora
+
 #Comienza logica
 
 while [ true ]
@@ -29,8 +32,10 @@ do
         if [ $numHijos -gt 5 ]
         then
             #echo $(ps --ppid $proceso) >> bitacora
+            echo "proceso padre: $proceso" >> bitacora
+            echo $(ps --ppid $proceso | tee >> bitacora)
+            echo ""
             echo "Soy el papa $proceso y estos son mis hijos \t"
-            ps --ppid $proceso | tee bitacora.txt
         fi
       fi
       anterior="${proceso}"
@@ -38,6 +43,6 @@ do
     fi
 
   done
-
+  #mail -s “Correo” israellinux19@gmail.com -A bitacora
 sleep $tiempo
 done
