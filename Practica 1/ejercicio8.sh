@@ -13,6 +13,7 @@ hijo_derecho=$(ps --ppid $pid_padre | sed -n '3p'| awk {'print $1'} )
 echo "Hijo izquiero $hijo_izquiero"
 echo "Hijo derecho $hijo_derecho"
 
+i=1 #Indice utilizado para rellenar el arreglo de hijos y padres
 killall binario
 
 #pstree -aps | grep binario
