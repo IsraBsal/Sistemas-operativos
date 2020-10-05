@@ -54,6 +54,16 @@ int backtrackCaballos(int **tablero, int x, int y, int salto, int n){
 
 }
 
+void escribir_Archivo(char cadena[]){
+   FILE *fp;
+ 	
+ 	fp = fopen ( "fichero", "r+" );
+ 	
+ 	fputs( cadena, fp );
+ 	
+ 	fclose ( fp );
+}
+
 
 
 
@@ -86,6 +96,9 @@ int main(int argc, char **argv){
         total=total+soluciones;
         printf("Soluciones en %d %d con pid %d = %d\n",j,k,getpid(),soluciones);
         printf("Parcial de soluciones de todo el tablero = %d con pid %d \n",total,getpid());
+        char buffer[50];
+        //sprintf("Soluciones en %d %d con pid %d = %d\n",j,k,getpid(),soluciones);
+        //escribir_Archivo(buffer);
         pid=fork();
         sleep(1);
       }
