@@ -65,6 +65,7 @@ int main(int argc, char **argv){
   int **tablero;
   int soluciones=0, total=0;
   pid_t pid;
+  FILE *fp;
 
   if(argc!=2){
   
@@ -86,19 +87,28 @@ int main(int argc, char **argv){
         tablero[j][k] = 1;
         soluciones=backtrackCaballos(tablero,j,k,2,n);
         total=total+soluciones;
-        printf("Soluciones en %d %d con pid %d = %d\n",j,k,getpid(),soluciones);
-        printf("Parcial de soluciones de todo el tablero = %d con pid %d \n",total,getpid());
-        char cadena[200];
-        sprintf(cadena,"Soluciones en %d %d con pid %d = %d\n",j,k,getpid(),soluciones);
-        FILE *fp;
- 	    fp = fopen ( "fichero.txt", "a+" );
+        //printf("Soluciones en %d %d con pid %d = %d\n",j,k,getpid(),soluciones);
+        //printf("Parcial de soluciones de todo el tablero = %d con pid %d \n",total,getpid());
+        char cadena[40];
+        char cadena2[58];
+        sprintf(cadena,"\nSoluciones en %d %d con pid %d = %d\n",j,k,getpid(),soluciones);
+        sprintf(cadena2,"\nParcial de soluciones de todo el tablero = %d con pid %d \n",total,getpid());
+        fp = fopen ( "fichero.txt", "r+" );
         fwrite(cadena,sizeof(char),sizeof(cadena),fp);
+        fwrite(cadena2,sizeof(char),sizeof(cadena2),fp);
         pid=fork();
-        sleep(1);
+        //sleep(1);
       }
+      /*else{
+            char cadena1[88];
+            sprintf(cadena1,"\nParcial de soluciones de todo el tablero = %d con pid %d SOY EL PAPA Y ESTO ES EL FINAL\n",total,getpid());
+            fp = fopen ( "fichero.txt", "r+" );
+            fwrite(cadena1,sizeof(char),sizeof(cadena1),fp);
+            
+        }*/
     }
   }
   //printf("Total de soluciones %d con pid %d\n",total,getpid());
-  
+  fclose(fp);
   return 0;
 }
