@@ -95,7 +95,7 @@ int main(int argc, char **argv){
 
 	    if(tid!=0){ 
             //Para esperar a los hijos, es codigo que ejcuta el padre
-         }
+        }
         else{
            //Codigo que realiza cada hijo
            for(k=0;k<n;k++){
@@ -112,7 +112,7 @@ int main(int argc, char **argv){
             fputs(suma,fp);//Escribimos
             fclose(fp);
             exit(1);
-         }
+        }
             //Termina codigo que realiza cada hijo y se muere
 	}
    //Termina abanico
