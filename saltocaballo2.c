@@ -93,7 +93,7 @@ int main(int argc, char **argv){
    for(int hijos=0; hijos<n;hijos++){
 	    tid=fork();
 
-	    if(tid!=0  && wait(NULL)!=0){ 
+	    if(tid!=0){ 
             //Para esperar a los hijos, es codigo que ejcuta el padre
          }
         else{
@@ -119,9 +119,7 @@ int main(int argc, char **argv){
 
    //Similiar a JOIN De hilos, esperamos a que terminen todos los hijos
    for(j=0;j<n;j++){
-      if(tid!=0){
-         wait(NULL);
-      }
+      wait(NULL);
    }
    //Termina Join
 
