@@ -50,36 +50,40 @@ void merge(void *direccion,int l,int m,int r,size_t sbytes, int (*comp)(void *a,
     void *direccion1;//
     void *direccion2;//
     printf("%d sysbytes\n",sbytes);
-    if(sbytes==sizeof(int)){//
-        char L[n1],R[n2];//
+    //if(sbytes==sizeof(int)){//
+        int L[n1],R[n2];//
         direccion1=L;//
         direccion2=R;//
         //Copiamos los datos para los arreglos L y R
         for(i=0;i<n1;i++){//
             printf("Llenar arreglo L\n");//
-            L[i] = (char*)direccion+sbytes*(l+i);
-            //intercambio((char*)direccion1 + sbytes * i, (char*)direccion + sbytes * (l+i));//
+            //L[i] = (char*)direccion+sbytes*(l+i);
+            intercambio((char*)direccion1 + sbytes * i, (char*)direccion + sbytes * (l+i));//
         }
         for(j=0;j<n2;j++){//
             printf("Llenar arreglo R\n");//
-            R[j] = (char*)direccion+sbytes*(m+j+1);
-            //intercambio((char*)direccion2 + sbytes * j, (char*)direccion + sbytes * (m+j+1));//
+            //R[j] = (char*)direccion+sbytes*(m+j+1);
+            intercambio((char*)direccion2 + sbytes * j, (char*)direccion + sbytes * (m+j+1));//
         }
-        printf("Arreglo L");
+        printf("Arreglo L copia\n");
         for (int i = 0; i < n1; ++i) { 
-           printf(" - %c ", L[i]); 
-       }
-       printf("\n\n");
-       printf("Arreglo R");
+           printf("%d ", L[i]); 
+        }
+        printf("\n\n");
+        printf("Arreglo R copia\n");
         for (int i = 0; i < n2; ++i) { 
-           printf(" - %c ", R[i]); 
-       }
-       printf("\n\n");
-        L[n1] = INT_MAX;
-        R[n2] = INT_MAX;
-        //intercambio((char*)direccion1 + sbytes * (n1+1), INT_MAX);
-        //intercambio((char*)direccion2 + sbytes * (n2+1), INT_MAX);
-        printf("Termine intercambio ints\n");
+           printf("%d ", R[i]); 
+        }
+        printf("\n\n");
+        void *max_integer;
+        int max[1]={INT_MAX};
+        max_integer=max;
+        //L[n1] = INT_MAX;
+        //R[n2] = INT_MAX;
+
+        intercambio((char*)direccion1 + sbytes * (n1),(char*)max_integer + sbytes * (0));
+        intercambio((char*)direccion2 + sbytes * (n2),(char*)max_integer + sbytes * (0));
+        
         i=0;
         j=0;
        
@@ -93,7 +97,8 @@ void merge(void *direccion,int l,int m,int r,size_t sbytes, int (*comp)(void *a,
                 j=j+1;
             }
         }
-    }
+        printf("Termine intercambio ints\n");
+    //}
     /*else{
         double L[n1],R[n2];
         direccion1=L;
@@ -150,7 +155,7 @@ int main()
     int num_elementos2 = sizeof(array2)/sizeof(array2[0]);;
     void *direccion2;
 
-    printf("Num elementos 1=%d\n",num_elementos1);
+    //printf("Num elementos 1=%d\n",num_elementos1);
     //printf("Num elementos 2=%d\n",num_elementos2);
 
     if(fork()){
