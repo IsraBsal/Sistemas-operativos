@@ -1,7 +1,7 @@
+//Hail CEUAMI
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <math.h>
 #include <limits.h>
 #include <float.h>
 #define true 1
