@@ -30,7 +30,7 @@ public class Semaforo {
 			
 		}
 		//Quitamos al hilo que esta al principio de la cola para que trabaje
-		propietario=cola.remove();
+		propietario=cola.remove(hilo);
 		LockSupport.unpark(propietario);
 		if (interrumpido)          // reassert interrupt status on exit
 			hilo.interrupt(); 
